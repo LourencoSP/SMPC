@@ -1,0 +1,232 @@
+services:
+
+  mosquitto:
+    image: eclipse-mosquitto
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+    
+
+  # MongoDB 
+  mongo1:
+    image: mongo
+    command: ["--replSet", "rs0"]
+    ports:
+      - "27017:27017"
+  mongo2:
+    image: mongo
+    command: ["--replSet", "rs0"]
+  mongo3:
+    image: mongo
+    command: ["--replSet", "rs0"]
+
+  # SSACP
+  ssacp1:
+    build: ./ssacp
+    depends_on: [mongo1, mongo2, mongo3]
+  ssacp2:
+    build: ./ssacp
+    depends_on: [mongo1, mongo2, mongo3]
+  ssacp3:
+    build: ./ssacp
+    depends_on: [mongo1, mongo2, mongo3]
+
+  # ISCCP 
+  isccp1:
+    build: ./isccp
+    environment: 
+      SSACP_HOST: ssacp1:50051
+      CHECKPOINT_ID: 0
+    depends_on: [mosquitto]
+  isccp2:
+    build: ./isccp
+    environment: 
+      SSACP_HOST: ssacp2:50051
+      CHECKPOINT_ID: 1
+    depends_on: [mosquitto]
+  isccp3:
+    build: ./isccp
+    environment: 
+      SSACP_HOST: ssacp3:50051
+      CHECKPOINT_ID: 2
+    depends_on: [mosquitto]
+  isccp4:
+    build: ./isccp
+    environment: 
+      SSACP_HOST: ssacp1:50051
+      CHECKPOINT_ID: 3
+    depends_on: [mosquitto]
+  isccp5:
+    build: ./isccp
+    environment: 
+      SSACP_HOST: ssacp2:50051
+      CHECKPOINT_ID: 4
+    depends_on: [mosquitto]
+  isccp6:
+    build: ./isccp
+    environment: 
+      SSACP_HOST: ssacp3:50051
+      CHECKPOINT_ID: 5
+    depends_on: [mosquitto]
+  isccp7:
+    build: ./isccp
+    environment: 
+      SSACP_HOST: ssacp1:50051
+      CHECKPOINT_ID: 6
+    depends_on: [mosquitto]
+  isccp8:
+    build: ./isccp
+    environment: 
+      SSACP_HOST: ssacp2:50051
+      CHECKPOINT_ID: 7
+    depends_on: [mosquitto]
+  isccp9:
+    build: ./isccp
+    environment: 
+      SSACP_HOST: ssacp3:50051
+      CHECKPOINT_ID: 8
+    depends_on: [mosquitto]
+  isccp10:
+    build: ./isccp
+    environment: 
+      SSACP_HOST: ssacp1:50051
+      CHECKPOINT_ID: 9
+    depends_on: [mosquitto]
+  isccp11:
+    build: ./isccp
+    environment: 
+      SSACP_HOST: ssacp2:50051
+      CHECKPOINT_ID: 10
+    depends_on: [mosquitto]
+  isccp12:
+    build: ./isccp
+    environment: 
+      SSACP_HOST: ssacp3:50051
+      CHECKPOINT_ID: 11
+    depends_on: [mosquitto]
+  isccp13:
+    build: ./isccp
+    environment: 
+      SSACP_HOST: ssacp1:50051
+      CHECKPOINT_ID: 12
+    depends_on: [mosquitto]
+  isccp14:
+    build: ./isccp
+    environment: 
+      SSACP_HOST: ssacp2:50051
+      CHECKPOINT_ID: 13
+    depends_on: [mosquitto]
+  isccp15:
+    build: ./isccp
+    environment: 
+      SSACP_HOST: ssacp3:50051
+      CHECKPOINT_ID: 14
+    depends_on: [mosquitto]
+
+#Cars
+  car1:
+    &car 
+    build: ./Car
+    depends_on: 
+      - mosquitto 
+    environment: 
+      CAR_ID: 1
+  car2:
+    <<: *car 
+    environment: 
+      CAR_ID: 2
+  car3:
+    <<: *car
+    environment:
+      CAR_ID: 3
+  car4:
+    <<: *car
+    environment:
+      CAR_ID: 4
+  car5:
+    <<: *car
+    environment:
+      CAR_ID: 5
+  car6:
+    <<: *car
+    environment:
+      CAR_ID: 6
+  car7:
+    <<: *car
+    environment:
+      CAR_ID: 7
+  car8:
+    <<: *car
+    environment:
+      CAR_ID: 8
+  car9:
+    <<: *car
+    environment:
+      CAR_ID: 9
+  car10:
+    <<: *car
+    environment:
+      CAR_ID: 10
+  car11:
+    <<: *car
+    environment:
+      CAR_ID: 11
+  car12:
+    <<: *car
+    environment:
+      CAR_ID: 12
+  car13:
+    <<: *car
+    environment:
+      CAR_ID: 13
+  car14:
+    <<: *car
+    environment:
+      CAR_ID: 14
+  car15:
+    <<: *car
+    environment:
+      CAR_ID: 15
+  car16:
+    <<: *car
+    environment:
+      CAR_ID: 16
+  car17:
+    <<: *car
+    environment:
+      CAR_ID: 17
+  car18:
+    <<: *car
+    environment:
+      CAR_ID: 18
+  car19:
+    <<: *car
+    environment:
+      CAR_ID: 19
+  car20:
+    <<: *car
+    environment:
+      CAR_ID: 20
+  car21:
+    <<: *car
+    environment:
+      CAR_ID: 21
+  car22:
+    <<: *car
+    environment:
+      CAR_ID: 22
+  car23:
+    <<: *car
+    environment:
+      CAR_ID: 23
+  car24:
+    <<: *car
+    environment:
+      CAR_ID: 24
+
+  ssvcp:
+    build: ./svcp
+    ports:
+      - "8000:8000"
+    depends_on: [mongo1, mongo2, mongo3]

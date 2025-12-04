@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+message TireInfo {
+  int32 car_id = 1;
+  string json_data = 2;
+}
+
+message Empty {}
+
+service TireService {
+  rpc SendTire(TireInfo) returns (Empty);
+}

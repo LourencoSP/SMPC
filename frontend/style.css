@@ -1,0 +1,145 @@
+:root {
+    --f1-red: #e10600;
+    --f1-dark: #15151e;
+    --f1-gray: #38383f;
+    --f1-light-gray: #d0d0d2;
+}
+
+body {
+    background-color: var(--f1-dark);
+    color: white;
+    font-family: 'Titillium Web', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--f1-red);
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 5px solid black;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+/* ESTILO DO LOGO */
+.f1-logo-img {
+    height: 35px; /* Tamanho ajustado */
+    width: auto;
+    /* Truque para transformar logo preto em branco puro */
+    filter: brightness(0) invert(1);
+}
+
+h1 {
+    margin: 0;
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.8rem;
+}
+
+#grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    padding: 30px;
+}
+
+.car-card {
+    background-color: white;
+    color: black;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    border-right: 4px solid var(--f1-light-gray);
+    border-bottom: 4px solid var(--f1-light-gray);
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.car-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--f1-red);
+}
+
+.team-header {
+    padding: 12px 15px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.car-image-container {
+    background: linear-gradient(to bottom, #f3f3f3, #ffffff);
+    padding: 10px 0;
+    text-align: center;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.car-image-container img {
+    max-width: 95%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.2));
+}
+
+.telemetry-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 10px;
+    background-color: #1f1f1f;
+    flex-grow: 1;
+}
+
+.tire-box {
+    background-color: #2b2b2b;
+    padding: 8px;
+    border-radius: 4px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-left: 5px solid gray;
+}
+
+.tire-label {
+    font-size: 0.75rem;
+    color: #bbb;
+    text-transform: uppercase;
+}
+
+.tire-data {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Cores de temperatura */
+.temp-cold { border-left-color: #00d2be; } /* Frio (Ciano) */
+.temp-optimal { border-left-color: #00ff00; } /* Ideal (Verde) */
+.temp-hot { border-left-color: #ff0000; } /* Quente (Vermelho) */
+
+.driver-info {
+    font-size: 1.4rem;
+    font-weight: 900;
+    font-style: italic;
+    padding: 5px 15px;
+    background-color: white;
+}
+
+.stats-footer {
+    padding: 8px;
+    font-size: 0.8rem;
+    text-align: center;
+    color: #666;
+    background-color: #eee;
+    font-family: monospace;
+}
